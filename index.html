@@ -122,7 +122,7 @@ a {
 
       <div id="On" class="cont">
 
-<div id="TV"><img class="All" src="https://da.gd/UPmcJw" alt="X-TV"/></div>
+<div class="TV" data-url="https://lamovie.github.io/CONTENIDO/X-TV.html"><img class="All" src="https://da.gd/UPmcJw" alt="X-TV"/></div>
 
 <a href="https://cine-sync-copy-232195b0.base44.app"><img class="All" src="https://is.gd/Hc7ef3" alt="CINE-CHAT"/></a>
 
@@ -130,7 +130,7 @@ a {
 
 <a href="#"><img class="All" id="X" src="https://da.gd/lRavyr" alt="X"/></a>
 
-<a href="https://lamovie.github.io/CONTENIDO/SPORT-TV.html"><img class="All" src="https://is.gd/cPBeiP" alt="SPORT-TV"/></a>
+<div class="TV" data-url="https://lamovie.github.io/CONTENIDO/SPORT-TV.html"><img class="All" src="https://is.gd/cPBeiP" alt="SPORT-TV"/></div>
 
 <a href="BASS-NATION.html"><img class="All" src="https://da.gd/bNbRrR" alt="BASS-NATION"/></a>
 
@@ -241,21 +241,27 @@ a {
 </script>
      <!-- PRECAUTION MOBILE -->
 <script>
-     TV.onclick = () => {
-         Swal.fire({
-    title: '⚠️Usar Un Bloqueador De Anuncios⚠️', 
-    html: '<a id="A" href="https://play.google.com/store/apps/details?id=com.hsv.freeadblockerbrowser" target="_blank">🔴 FreeAddBlockerBrowser 🔴</a>', 
+    var TV = document.querySelectorAll('.TV');
+    
+   TV.forEach((enlace) => {
+      enlace.onclick = () => {
+          var ENLACE = enlace.getAttribute('data-url');
+            
+            Swal.fire({
+                title: '⚠️Usar Un Bloqueador De Anuncios⚠️', 
+                html: '<a id="A" href="https://play.google.com/store/apps/details?id=com.hsv.freeadblockerbrowser" target="_blank">🔴 FreeAddBlockerBrowser 🔴</a>', 
     icon: 'info',
-     confirmButtonText: 'Entrar',
-     confirmButtonColor: '#3085d6',
- }).then((result) => {
-        
+    confirmButtonText: 'Entrar',
+    confirmButtonColor: '#3085d6',
+         }).then((result) => {
+    
      if (result.isConfirmed) {
-         abrirFuera('https://lamovie.github.io/CONTENIDO/X-TV.html');            
-        }
-   });
-}
-</script>    
+            abrirFuera(ENLACE);           
+                }
+            });
+        };
+    });
+</script>     
 </body>
 </html> 
 
