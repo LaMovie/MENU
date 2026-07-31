@@ -267,13 +267,9 @@ document.addEventListener('fullscreenchange', function() {
   var videoElement = document.getElementById('Vid');
   
   if (document.fullscreenElement) {
-    if (screen.orientation && screen.orientation.lock) {
-      screen.orientation.lock('landscape').catch(function(error) {
-        console.warn("WebView bloqueó el giro automático:", error);
-        // HACK: Si el WebView bloquea el giro de Android, forzamos la rotación con CSS
-        videoElement.classList.add('rotacion-forzada');
-      });
-    }
+     videoElement.classList.add('rotacion-forzada');
+     
+    
   } else {
     // Si salimos de pantalla completa, intentar desbloquear
     if (screen.orientation && screen.orientation.unlock) {
