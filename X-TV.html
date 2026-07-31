@@ -99,6 +99,22 @@ a {
     border-radius: 8px;
     object-fit: cover;
 }
+
+/* Clase que se activa cuando falla el giro nativo en el WebView */
+
+.rotacion-forzada {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    /* Invertimos ancho y alto para forzar proporciones apaisadas */
+    width: 100vh !important; 
+    height: 100vw !important;
+    /* Rotamos 90 grados y centramos */
+    transform: translate(-50%, -50%) rotate(90deg) !important;
+    z-index: 9999 !important;
+    background: black;
+    border-radius: 0 !important;
+}
 </style>
 <style>
 body{-webkit-animation:puff-in-hor 1s cubic-bezier(.47,0,.745,.715) both;animation:puff-in-hor 1.5s cubic-bezier(.47,0,.745,.715) both}@-webkit-keyframes puff-in-hor{0%{-webkit-transform:scaleX(2);transform:scaleX(2);-webkit-filter:blur(4px);filter:blur(4px);opacity:0}100%{-webkit-transform:scaleX(1);transform:scaleX(1);-webkit-filter:blur(0px);filter:blur(0px);opacity:1}}@keyframes puff-in-hor{0%{-webkit-transform:scaleX(2);transform:scaleX(2);-webkit-filter:blur(4px);filter:blur(4px);opacity:0}100%{-webkit-transform:scaleX(1);transform:scaleX(1);-webkit-filter:blur(0px);filter:blur(0px);opacity:1}}
@@ -248,16 +264,23 @@ var iframe = document.querySelector('iframe');
    <!-- DETECTAR FULL SCREEN -->
 <script>
 document.addEventListener('fullscreenchange', function() {
+  var videoElement = document.getElementById('Vid');
+  
   if (document.fullscreenElement) {
-    <!-- Si estamos en pantalla completa, bloquear orientación horizontal -->
     if (screen.orientation && screen.orientation.lock) {
-      screen.orientation.lock('landscape');
+      screen.orientation.lock('landscape').catch(function(error) {
+        console.warn("WebView bloqueó el giro automático:", error);
+        // HACK: Si el WebView bloquea el giro de Android, forzamos la rotación con CSS
+        videoElement.classList.add('rotacion-forzada');
+      });
     }
   } else {
-    <!-- Si salimos de pantalla completa, volver a orientación vertical -->
-    if (screen.orientation && screen.orientation.lock) {
-      screen.orientation.lock('portrait');
+    // Si salimos de pantalla completa, intentar desbloquear
+    if (screen.orientation && screen.orientation.unlock) {
+      screen.orientation.unlock();
     }
+    // Remover el hack de CSS
+    videoElement.classList.remove('rotacion-forzada');
   }
 });
 </script>
