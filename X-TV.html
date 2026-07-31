@@ -83,7 +83,7 @@ a {
     border-radius: 50px;
   &:hover {
       color: #fff;
-      background: gold;
+      background: #000;
   }
 }
 #FF {
@@ -100,20 +100,34 @@ a {
     object-fit: cover;
 }
 
-/* Clase que se activa cuando falla el giro nativo en el WebView */
+/* Clases para forzar el modo horizontal manual en AppCreator24 */
 
-.rotacion-forzada {
+.fake-fullscreen {
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
-    /* Invertimos ancho y alto para forzar proporciones apaisadas */
     width: 100vh !important; 
     height: 100vw !important;
-    /* Rotamos 90 grados y centramos */
-    transform: translate(-50%, -50%) rotate(90deg) !important;
+    transform: translate(-50%, -15%) rotate(90deg) !important;
     z-index: 9999 !important;
-    background: black;
+    background: black !important;
     border-radius: 0 !important;
+    margin: 0 !important;
+    scale: 1 !important;
+}
+
+.btn-flotante {
+    position: fixed !important;
+    bottom: -30vh !important; 
+    left: 40vh !important;
+    z-index: 10000 !important;
+    transform: rotate(90deg) !important; 
+    background: rgba(105, 0, 0, 0.8) !important;
+    color: white !important;
+    padding: 8px 15px !important;
+    border: none !important;
+    border-radius: 5px !important;
+    opacity: .3 !important;
 }
 </style>
 <style>
@@ -244,41 +258,25 @@ H.textContent = NAMER.toUpperCase();
 document.write('<iframe allowfullscreen width="'+width+'" height="'+height+'" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true" src="https://embed.saohgdasregions.fun/embed2/'+id+'.php"></iframe>');
 </script>
 
-       <!-- FULL SCREEN -->
+<!-- FULL SCREEN FORZADO PARA APPCREATOR24 -->
 <script>
-var iframe = document.querySelector('iframe');
+var iframe = document.getElementById('Vid');
+var btnFull = document.getElementById('FULL');
+var isFakeFull = false;
 
-      FULL.onclick = () => {
-  if (iframe.requestFullscreen) {
-    iframe.requestFullscreen();
-  } else if (iframe.mozRequestFullScreen) { // Firefox
-    iframe.mozRequestFullScreen();
-  } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari and Opera
-    iframe.webkitRequestFullscreen();
-  } else if (iframe.msRequestFullscreen) { // IE/Edge
-    iframe.msRequestFullscreen();
+btnFull.onclick = () => {
+  if (!isFakeFull) {
+    iframe.classList.add('fake-fullscreen');
+   btnFull.classList.add('btn-flotante');
+    btnFull.innerHTML = "SALIR";
+    isFakeFull = true;
+          } else {
+       iframe.classList.remove('fake-fullscreen');
+    btnFull.classList.remove('btn-flotante');
+    btnFull.innerHTML = "Pantalla Completa";
+    isFakeFull = false;
   }
 };
-</script>
-
-   <!-- DETECTAR FULL SCREEN -->
-<script>
-document.addEventListener('fullscreenchange', function() {
-  var videoElement = document.getElementById('Vid');
-  
-  if (document.fullscreenElement) {
-     videoElement.classList.add('rotacion-forzada');
-     
-    
-  } else {
-    // Si salimos de pantalla completa, intentar desbloquear
-    if (screen.orientation && screen.orientation.unlock) {
-      screen.orientation.unlock();
-    }
-    // Remover el hack de CSS
-    videoElement.classList.remove('rotacion-forzada');
-  }
-});
 </script>
 
       <!-- HORIZONTAL -->
