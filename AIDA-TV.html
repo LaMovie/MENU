@@ -116,8 +116,18 @@ h1 {
   ];
 
  var MIX = AIDA[Math.floor(Math.random() * AIDA.length)]; 
+    
+     I.src = MIX;
         
-        I.src = MIX;
+    // Buscamos un patrón del tipo "número x número" (ej: 3x01, 4x12, 5x03) en el enlace.
+    
+        var match = MIX.match(/(\d+x\d+)/i);
+        if (match) {
+            // Si lo encuentra, extrae el texto (ej: "3x01") y lo formatea ordenadamente en el H3.
+            
+ var cap = match[1].toLowerCase();
+            document.getElementById('H').innerText = "📺 " + cap.toUpperCase() + " 📺";
+        }
     }; 
 </script>
 
