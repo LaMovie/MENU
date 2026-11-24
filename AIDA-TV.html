@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>AIDA 📺</title>
+   <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet"/>
 <style>
 body {
     background: #000;
@@ -34,11 +35,25 @@ body {
     font-weight: bold;    
     border-radius: 50px;    
 }
-#Opaco {
-    opacity: .5;
+.Opaco {
+    opacity: .5;    
+    color: #ccc;
+    opacity: 0.3;
+    margin-top: 7vh;
+    font-size: 35px;
+    font-family: Luckiest Guy, cursive;
+    -webkit-text-stroke: .1px #003;
+    text-shadow: 0px .1px 0 #001;
 }
-h1 {
+#T {
     color: gold;
+    font-family: Luckiest Guy, cursive;
+    -webkit-text-stroke: .1px #003;
+    text-shadow: 0px .1px 0 #001;
+}
+#H {
+    color: gold;
+    font-family: serif;
 }
 
 @media (min-width: 500px) {
@@ -54,17 +69,20 @@ h1 {
 </style>
 </head>
 <body>        
-         <div id="Container">   
+      <div id="Container">   
      
-      <h1>⚙️AIDA-TV⚙️</h1><br/>
+  <h1 id="T">👄 AIDA-TV 👅</h1><br/>
      
     <iframe id="I" src="" frameborder="0"></iframe>
              
-<h3 id="H" style="color: gold; font-family: serif">📺 AIDA-TV 📺</h3>             
+   <h3 id="H">📺 AIDA-TV 📺</h3>             
   
   <button id="FULL">Pantalla Completa</button>
        
-       <img id="Opaco" src="https://bit.ly/3G2A4hx" alt="Retroceder" style="scale: 70%"/>  
+       <pre class="Opaco">
+    °LA MOVIE
+   PROPERTY°
+         </pre>
             </div>
 <script>
     window.onload = function() {
@@ -125,7 +143,8 @@ h1 {
             // Si lo encuentra, extrae el texto (ej: "3x01") y lo formatea ordenadamente en el H3.
             
  var cap = match[1].toLowerCase();
-            document.getElementById('H').innerText = "📺 " + cap.toUpperCase() + " 📺";
+   
+ H.innerText = "📺 " + cap + " 📺";
         }
     }; 
 </script>
