@@ -15,7 +15,7 @@ body {
     place-items: center;
     flex-direction: column;
 }
-#I {
+#V {
     width: 90%;
     height: 35vh;
     aspect-ratio: 16/9;
@@ -24,6 +24,11 @@ body {
     border-left: 2vh solid brown;
     border-right: .1vh solid brown;
     border-bottom: 2vh solid #800000;
+}
+#V:fullscreen,
+#V:-webkit-full-screen {
+    border-color: #000;
+    border-radius: 0;
 }
 #FULL {
     width: 15vh;
@@ -73,7 +78,7 @@ body {
      
   <h1 id="T">👄 AIDA-TV 👅</h1><br/>
      
-    <video id="I" src="" autoplay controls></video>
+    <video id="V" src="" autoplay controls></video>
              
    <h3 id="H">📺 AIDA-TV 📺</h3>             
   
@@ -126,15 +131,12 @@ body {
                   'https://archive.org/download/5x-03_202405/5x07%28MP4%29.mp4',
                   'https://archive.org/download/5x-03_202405/5x08%28MP4%29.mp4',
                   'https://archive.org/download/5x-03_202405/5x09%28MP4%29.mp4',
-                  'https://archive.org/download/5x-03_202405/5x10%28MP4%29.mp4',
-                  
-"https://drive.google.com/file/d/1-J8XHg0zwfBGMThsty21oyopBQx9dJOL/preview",
-  "https://drive.google.com/file/d/1G8wb4aSClhIiXbwKJsVjQZoqfMsCmsEQ/preview"
+                  'https://archive.org/download/5x-03_202405/5x10%28MP4%29.mp4'
   ];
 
  var MIX = AIDA[Math.floor(Math.random() * AIDA.length)]; 
     
-     I.src = MIX;
+     V.src = MIX;
         
     // Buscamos un patrón del tipo "número x número" (ej: 3x01, 4x12, 5x03) en el enlace.
     
